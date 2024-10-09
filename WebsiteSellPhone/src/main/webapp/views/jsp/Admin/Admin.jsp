@@ -29,18 +29,40 @@
                         <a href="#">Website Sell Phone</a>
                     </div>
                 </div>
+
                 <ul class="sidebar-nav">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="admin.html" class="sidebar-link">
                             <i class="fa-solid fa-gauge"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="MyStore.html" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                           data-bs-target="#subMenu" aria-expanded="false" aria-controls="subMenu">
                             <i class="fa-solid fa-store"></i>
                             <span>My store</span>
                         </a>
+                        <ul id="subMenu" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li>
+                                <a href="admin/product-manage" class="sidebar-link ms-3">
+                                    <i class="fa-solid fa-box"></i>
+                                    <span>Product</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="admin/category-manage" class="sidebar-link ms-3">
+                                    <i class="fa-solid fa-tags"></i>
+                                    <span>Category</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/admin/order-manage" class="sidebar-link ms-3">
+                                    <i class="fa-solid fa-shopping-cart"></i>
+                                    <span>Order</span>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">
@@ -55,9 +77,9 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="admin/user-manage" class="sidebar-link">
                             <i class="fa-solid fa-people-group"></i>
-                            <span>Team</span>
+                            <span>User</span>
                         </a>
                     </li>
                     <li class="sidebar-item">

@@ -138,3 +138,11 @@ a.sidebar-link:hover {
     transform: rotate(45deg);
     transition: all 0.2s ease-out;
 }
+
+#icon-product {
+    width: 40px;
+}
+
+#icon-category {
+    width: 40px;
+}
