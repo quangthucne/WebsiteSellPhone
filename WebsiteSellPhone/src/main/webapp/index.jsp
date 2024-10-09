@@ -5,9 +5,11 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
+<jsp:include page="views/User/Layout/Header.jsp" />
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
+<jsp:include page="views/User/Layout/Footer.jsp" />
 </body>
 </html>
