@@ -6,18 +6,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+<link rel="stylesheet" type="text/css"
+	  href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css"
+	  href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/user/css/style.css" />
+<script src="https://kit.fontawesome.com/27e6f9e8b6.js" crossorigin="anonymous"></script>
+
 <body>
 	
-	<!-- Preloader -->
-	<div class="preloader">
-		<div class="preloader-inner">
-			<div class="preloader-icon">
-				<span></span>
-				<span></span>
-			</div>
-		</div>
-	</div>
-	<!-- End Preloader -->
+<%--	<!-- Preloader -->--%>
+<%--	<div class="preloader">--%>
+<%--		<div class="preloader-inner">--%>
+<%--			<div class="preloader-icon">--%>
+<%--				<span></span>--%>
+<%--				<span></span>--%>
+<%--			</div>--%>
+<%--		</div>--%>
+<%--	</div>--%>
+<%--	<!-- End Preloader -->--%>
 	
 	
 	<!-- Header -->
@@ -30,8 +41,8 @@
 						<!-- Top Left -->
 						<div class="top-left">
 							<ul class="list-main">
-								<li><i class="ti-headphone-alt"></i> +060 (800) 801-582</li>
-								<li><i class="ti-email"></i> support@shophub.com</li>
+								<li><i class="fa-solid fa-phone"></i> +060 (800) 801-582</li>
+								<li><i class="fa-solid fa-envelope"></i> support@shophub.com</li>
 							</ul>
 						</div>
 						<!--/ End Top Left -->
@@ -40,10 +51,10 @@
 						<!-- Top Right -->
 						<div class="right-content">
 							<ul class="list-main">
-								<li><i class="ti-location-pin"></i> Store location</li>
-								<li><i class="ti-alarm-clock"></i> <a href="#">Daily deal</a></li>
-								<li><i class="ti-user"></i> <a href="#">My account</a></li>
-								<li><i class="ti-power-off"></i><a href="login.html#">Login</a></li>
+								<li><i class="fa-solid fa-location-pin"></i> Store location</li>
+								<li><i class="fa-solid fa-clock"></i> <a href="#">Daily deal</a></li>
+								<li><i class="fa-solid fa-clock"></i> <a href="#">My account</a></li>
+								<li><i class="fa-solid fa-right-to-bracket"></i><a href="login.html#">Login</a></li>
 							</ul>
 						</div>
 						<!-- End Top Right -->
@@ -58,17 +69,17 @@
 					<div class="col-lg-2 col-md-2 col-12">
 						<!-- Logo -->
 						<div class="logo">
-							<a href="index.html"><img src="images/logo.png" alt="logo"></a>
+							<a href="index.html"><img src="${pageContext.request.contextPath}/assets/user/css/homecss/images/logo.png" alt="logo"></a>
 						</div>
 						<!--/ End Logo -->
 						<!-- Search Form -->
 						<div class="search-top">
-							<div class="top-search"><a href="#0"><i class="ti-search"></i></a></div>
+							<div class="top-search"><a href="#0"><i class="fa-solid fa-magnifying-glass"></i></a></div>
 							<!-- Search Form -->
 							<div class="search-top">
 								<form class="search-form">
 									<input type="text" placeholder="Search here..." name="search">
-									<button value="search" type="submit"><i class="ti-search"></i></button>
+									<button value="search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></i></button>
 								</form>
 							</div>
 							<!--/ End Search Form -->
@@ -87,7 +98,7 @@
 								</select>
 								<form>
 									<input name="search" placeholder="Search Products Here....." type="search">
-									<button class="btnn"><i class="ti-search"></i></button>
+									<button class="btnn"><i class="fa-solid fa-magnifying-glass"></i></button>
 								</form>
 							</div>
 						</div>
@@ -102,7 +113,7 @@
 								<a href="#" class="single-icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
 							</div>
 							<div class="sinlge-bar shopping">
-								<a href="#" class="single-icon"><i class="ti-bag"></i> <span class="total-count">2</span></a>
+								<a href="#" class="single-icon"><i class="fa-solid fa-cart-shopping"></i> <span class="total-count">2</span></a>
 								<!-- Shopping Item -->
 								<div class="shopping-item">
 									<div class="dropdown-cart-header">
@@ -2206,7 +2217,7 @@
 						<!-- Single Widget -->
 						<div class="single-footer about">
 							<div class="logo">
-								<a href="index.html"><img src="images/logo2.png" alt="#"></a>
+								<a href="index.html"><img src="${pageContext.request.contextPath}/assets/user/css/homecss/images/logo2.png" alt="#"></a>
 							</div>
 							<p class="text">Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue,  magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
 							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">+0123 456 789</a></span></p>
@@ -2256,10 +2267,10 @@
 							</div>
 							<!-- End Single Widget -->
 							<ul>
-								<li><a href="#"><i class="ti-facebook"></i></a></li>
-								<li><a href="#"><i class="ti-twitter"></i></a></li>
-								<li><a href="#"><i class="ti-flickr"></i></a></li>
-								<li><a href="#"><i class="ti-instagram"></i></a></li>
+								<li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa-brands fa-flickr"></i></a></li>
+								<li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
 							</ul>
 						</div>
 						<!-- End Single Widget -->
@@ -2279,7 +2290,7 @@
 						</div>
 						<div class="col-lg-6 col-12">
 							<div class="right">
-								<img src="images/payments.png" alt="#">
+								<img src="${pageContext.request.contextPath}/assets/user/css/homecss/images/payments.png" alt="#">
 							</div>
 						</div>
 					</div>
@@ -2290,37 +2301,39 @@
 	<!-- /End Footer Area -->
  
 	<!-- Jquery -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<!-- Popper JS -->
-	<script src="js/popper.min.js"></script>
-	<!-- Bootstrap JS -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Color JS -->
-	<script src="js/colors.js"></script>
-	<!-- Slicknav JS -->
-	<script src="js/slicknav.min.js"></script>
-	<!-- Owl Carousel JS -->
-	<script src="js/owl-carousel.js"></script>
-	<!-- Magnific Popup JS -->
-	<script src="js/magnific-popup.js"></script>
-	<!-- Waypoints JS -->
-	<script src="js/waypoints.min.js"></script>
-	<!-- Countdown JS -->
-	<script src="js/finalcountdown.min.js"></script>
-	<!-- Nice Select JS -->
-	<script src="js/nicesellect.js"></script>
-	<!-- Flex Slider JS -->
-	<script src="js/flex-slider.js"></script>
-	<!-- ScrollUp JS -->
-	<script src="js/scrollup.js"></script>
-	<!-- Onepage Nav JS -->
-	<script src="js/onepage-nav.min.js"></script>
-	<!-- Easing JS -->
-	<script src="js/easing.js"></script>
-	<!-- Active JS -->
-	<script src="js/active.js"></script>
-
+<%--    <script src="js/jquery.min.js"></script>--%>
+<%--    <script src="js/jquery-migrate-3.0.0.js"></script>--%>
+<%--	<script src="js/jquery-ui.min.js"></script>--%>
+<%--	<!-- Popper JS -->--%>
+<%--	<script src="js/popper.min.js"></script>--%>
+<%--	<!-- Bootstrap JS -->--%>
+<%--	<script src="js/bootstrap.min.js"></script>--%>
+<%--	<!-- Color JS -->--%>
+<%--	<script src="js/colors.js"></script>--%>
+<%--	<!-- Slicknav JS -->--%>
+<%--	<script src="js/slicknav.min.js"></script>--%>
+<%--	<!-- Owl Carousel JS -->--%>
+<%--	<script src="js/owl-carousel.js"></script>--%>
+<%--	<!-- Magnific Popup JS -->--%>
+<%--	<script src="js/magnific-popup.js"></script>--%>
+<%--	<!-- Waypoints JS -->--%>
+<%--	<script src="js/waypoints.min.js"></script>--%>
+<%--	<!-- Countdown JS -->--%>
+<%--	<script src="js/finalcountdown.min.js"></script>--%>
+<%--	<!-- Nice Select JS -->--%>
+<%--	<script src="js/nicesellect.js"></script>--%>
+<%--	<!-- Flex Slider JS -->--%>
+<%--	<script src="js/flex-slider.js"></script>--%>
+<%--	<!-- ScrollUp JS -->--%>
+<%--	<script src="js/scrollup.js"></script>--%>
+<%--	<!-- Onepage Nav JS -->--%>
+<%--	<script src="js/onepage-nav.min.js"></script>--%>
+<%--	<!-- Easing JS -->--%>
+<%--	<script src="js/easing.js"></script>--%>
+<%--	<!-- Active JS -->--%>
+<%--	<script src="js/active.js"></script>--%>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 </body>
 </html>
