@@ -21,7 +21,7 @@ CREATE TABLE user (
     email VARCHAR(255),
     phone VARCHAR(12),
     date_created DATE,
-    status BIT,
+    status_user BIT,
     FOREIGN KEY (id_role) REFERENCES Role(id_role)
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE address (
 CREATE TABLE category (
     id_category INT PRIMARY KEY IDENTITY(1,1),
     category_name NVARCHAR(255),
-    status BIT
+    status_category BIT
 );
 
 CREATE TABLE product (
@@ -47,9 +47,9 @@ CREATE TABLE product (
     short_desc NVARCHAR(255),
     detail NVARCHAR(255),
     quantity INT,
-    price DECIMAL(19, 4),
+    price INT,
     date_created DATE,
-    status BIT,
+    status_product BIT,
     FOREIGN KEY (id_category) REFERENCES Category(id_category)
 );
 -- commit 2 product and image
@@ -76,8 +76,8 @@ CREATE TABLE order (
     address NVARCHAR(255),
     full_name NVARCHAR(255),
     date_created DATE,
-    status BIT,
-    total_amount DECIMAL(19, 4),
+    status_order BIT,
+    total_amount INT,
     FOREIGN KEY (id_user) REFERENCES [User](id_user)
 );
 
@@ -85,7 +85,7 @@ CREATE TABLE order_detail (
     id_order_detail INT PRIMARY KEY IDENTITY(1,1),
     id_order INT,
     id_product INT,
-    price DECIMAL(19, 4),
+    price INT,
     quantity INT,
     FOREIGN KEY (id_order) REFERENCES [Order](id_order),
     FOREIGN KEY (id_product) REFERENCES Product(id_product)
@@ -111,3 +111,6 @@ SELECT *
 FROM Product p JOIN Category c on p.id_category = c.id_category JOIN (SELECT id_product, id_image, MIN(name_image) as name 
         FROM Image 
         GROUP BY id_product, id_image) Image on p.id_product = Image.id_product
+
+
+SELECT DISTINCT * from [Order] o INNER join  [User] u on o.id_user = u.id_user
