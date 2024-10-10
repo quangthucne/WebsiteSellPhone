@@ -14,8 +14,9 @@ public class AdressDAO extends DataDAO implements AdressInterface {
     @Override
     public List<AdressModel> selectAll() {
         List<AdressModel> list = new ArrayList<>();
-        try(Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(ADRESS_SELECT_ALL)) {
-            ResultSet rs = ps.executeQuery();
+        try {
+            Connection con = getConnection();
+            ResultSet rs = query(ADRESS_SELECT_ALL);
             while (rs.next()) {
                 int idAddress = rs.getInt("id_address");
                 int idUser = rs.getInt("id_user");
@@ -33,7 +34,8 @@ public class AdressDAO extends DataDAO implements AdressInterface {
     @Override
     public AdressModel selectById(int id) {
         AdressModel adressModel = null;
-        try (Connection con = getConnection()){
+        try {
+            Connection con = getConnection();
             ResultSet rs = query(ADRESS_SELECT_BY_ID, id);
             while (rs.next()) {
                 int idAddress = rs.getInt("id_address");
@@ -52,8 +54,9 @@ public class AdressDAO extends DataDAO implements AdressInterface {
     @Override
     public List<AdressModel> selectByIdUser(int idUser) {
         List<AdressModel> list = new ArrayList<>();
-        try(Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(ADRESS_SELECT_ALL)) {
-            ResultSet rs = ps.executeQuery();
+        try {
+            Connection con = getConnection();
+            ResultSet rs = query(ADRESS_SELECT_BY_ID_USER, idUser);
             while (rs.next()) {
                 int idAddress = rs.getInt("id_address");
                 String phone = rs.getString("phone");

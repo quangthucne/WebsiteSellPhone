@@ -12,8 +12,9 @@ public class UserDAO extends DataDAO implements UserInterface {
     @Override
     public List<UserModel> selectAll() {
         List<UserModel> list = new ArrayList<>();
-        try(Connection con = getConnection(); PreparedStatement ps = con.prepareStatement(USER_SELECT_ALL)) {
-            ResultSet rs = ps.executeQuery();
+        try {
+            Connection con = getConnection();
+            ResultSet rs = query(USER_SELECT_ALL);
             while (rs.next()) {
                 int id = rs.getInt(COLUMN_ID_USER);
                 String fullName = rs.getString(COLUMN_FULL_NAME);
