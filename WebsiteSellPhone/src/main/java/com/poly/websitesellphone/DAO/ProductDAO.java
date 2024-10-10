@@ -13,15 +13,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO extends DataDAO implements ProductInterface {
+    // query all
     @Override
     public List<ProductModel> selectAll() {
         List<ProductModel> list = new ArrayList<>();
+        List<ImageModel> images = new ArrayList<>();
         try {
             Connection con = getConnection();
             ResultSet rs = query(PRODUCT_SELECT_ALL);
             while (rs.next()){
+                //info SQl
                 int idProduct = rs.getInt(COLUMN_ID_PRODUCT);
                 int idCategory = rs.getInt(COLUMN_ID_CATEGORY);
+                int idImage = rs.getInt(COLUMN_ID_IMAGE);
+                String nameCategory = rs.getString(COLUMN_NAME_CATEGORY);
+                String nameImage = rs.getString(COLUMN_NAME_IMAGE);
                 String name = rs.getString(COLUMN_NAME);
                 String shortDesc = rs.getString(COLUMN_SHORT_DESC);
                 String detail = rs.getString(COLUMN_DETAIL);
@@ -29,8 +35,9 @@ public class ProductDAO extends DataDAO implements ProductInterface {
                 double price = rs.getDouble(COLUMN_PRICE);
                 Date dateCreated = rs.getDate(COLUMN_DATE_CREATED);
                 int status = rs.getInt(COLUMN_STATUS);
-                ImageDAO imageDAO = new ImageDAO();
-                List<ImageModel> images = imageDAO.selectByProductId(idProduct);
+                //img
+                ImageModel imageModel = new ImageModel(idImage, idProduct, nameImage);
+                images.add(imageModel);
                 list.add(new ProductModel(idProduct, idCategory, name, shortDesc, detail, quantity, price, dateCreated, status, images));
 
             }
