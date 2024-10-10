@@ -1,15 +1,15 @@
 ﻿USE master;
 CREATE DATABASE sales_phone;
-USE sales_phone;
+USE sell_phone;
 
 CREATE TABLE role (
     id_role INT PRIMARY KEY IDENTITY(1,1),
-    name VARCHAR(50)
+    role_name VARCHAR(50)
 );
 
-INSERT INTO Role (name) VALUES ('ADMIN');
-INSERT INTO Role (name) VALUES ('USER');
-INSERT INTO Role (name) VALUES ('MODERATOR');
+INSERT INTO Role (role_name) VALUES ('ADMIN');
+INSERT INTO Role (role_name) VALUES ('USER');
+INSERT INTO Role (role_name) VALUES ('MODERATOR');
 
 CREATE TABLE user (
     id_user INT PRIMARY KEY IDENTITY(1,1),
@@ -36,14 +36,14 @@ CREATE TABLE address (
 -- commit 1
 CREATE TABLE category (
     id_category INT PRIMARY KEY IDENTITY(1,1),
-    name NVARCHAR(255),
+    category_name NVARCHAR(255),
     status BIT
 );
 
 CREATE TABLE product (
     id_product INT PRIMARY KEY IDENTITY(1,1),
     id_category INT,
-    name NVARCHAR(255),
+    name_product NVARCHAR(255),
     short_desc NVARCHAR(255),
     detail NVARCHAR(255),
     quantity INT,
@@ -52,6 +52,7 @@ CREATE TABLE product (
     status BIT,
     FOREIGN KEY (id_category) REFERENCES Category(id_category)
 );
+-- commit 2 product and image
 
 CREATE TABLE cart (
     id_cart INT PRIMARY KEY IDENTITY(1,1),
@@ -59,7 +60,7 @@ CREATE TABLE cart (
     FOREIGN KEY (id_user) REFERENCES [User](id_user)
 );
 
-CREATE TABLE cartDetail (
+CREATE TABLE cart_detail (
     id_cart_detail INT PRIMARY KEY IDENTITY(1,1),
     id_cart INT,
     id_product INT,
@@ -67,8 +68,8 @@ CREATE TABLE cartDetail (
     FOREIGN KEY (id_cart) REFERENCES Cart(id_cart),
     FOREIGN KEY (id_product) REFERENCES Product(id_product)
 );
-
-CREATE TABLE crder (
+--
+CREATE TABLE order (
     id_order INT PRIMARY KEY IDENTITY(1,1),
     id_user INT,
     phone VARCHAR(12),
@@ -98,3 +99,15 @@ CREATE TABLE image (
 );
 
 
+-- select all product 
+SELECT p.id AS product_id, p.name AS product_name, p.description AS description, p.price AS price, c.id AS category_id, c.name AS category_name, c.image AS category_image, img.name AS image_name
+FROM products p JOIN categories c ON p.cat_id = c.id JOIN (SELECT prod_id, MIN(name) AS name
+    FROM images
+    GROUP BY prod_id) img ON p.id = img.prod_id
+
+
+
+SELECT *
+FROM Product p JOIN Category c on p.id_category = c.id_category JOIN (SELECT id_product, id_image, MIN(name_image) as name 
+        FROM Image 
+        GROUP BY id_product, id_image) Image on p.id_product = Image.id_product

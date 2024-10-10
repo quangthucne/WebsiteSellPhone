@@ -8,6 +8,7 @@ public class CategoryModel {
     public CategoryModel() {
 
     }
+
     public CategoryModel(int idCategory, String name, int status) {
         this.idCategory = idCategory;
         this.name = name;
