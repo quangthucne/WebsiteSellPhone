@@ -9,14 +9,13 @@ public class UserModel {
     private String userName;
     private String password;
     private int gender;
-    private int idRole;
+    private int role;
     private String email;
     private String phone;
     private Date dateCreated;
     private int status;
 
     private List<AdressModel> adressList;
-
 
     public UserModel(){}
 
@@ -26,7 +25,7 @@ public class UserModel {
         this.userName = userName;
         this.password = password;
         this.gender = gender;
-        this.idRole = idRole;
+        this.role = role;
         this.email = email;
         this.phone = phone;
         this.dateCreated = dateCreated;
@@ -74,12 +73,12 @@ public class UserModel {
         this.gender = gender;
     }
 
-    public int getIdRole() {
-        return idRole;
+    public int getRole() {
+        return role;
     }
 
-    public void setIdRole(int idRole) {
-        this.idRole = idRole;
+    public void setRole(int role) {
+        this.role = role;
     }
 
     public String getEmail() {

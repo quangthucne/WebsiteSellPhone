@@ -8,7 +8,7 @@ public interface UserInterface {
     String TABLE_NAME = "user";
     String COLUMN_ID_USER = "id_user";
     String COLUMN_FULL_NAME = "full_name";
-    String COLUNM_USER_NAME = "user_name";
+    String COLUNM_USER_NAME = "username";
     String COLUMN_PASSWORD = "password";
     String COLUMN_GENDER = "gender";
     String COLUMN_ID_ROLE = "id_role";
@@ -32,4 +32,6 @@ public interface UserInterface {
     public boolean update(UserModel userModel);
 
     public boolean delete(UserModel userModel);
+
+    public boolean updatePassword(String username);
 }

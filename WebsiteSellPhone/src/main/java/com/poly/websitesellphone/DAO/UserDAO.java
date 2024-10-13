@@ -75,7 +75,7 @@ public class UserDAO extends DataDAO implements UserInterface {
                     userModel.getUserName(),
                     userModel.getPassword(),
                     userModel.getGender(),
-                    userModel.getIdRole(),
+                    userModel.getRole(),
                     userModel.getEmail(),
                     userModel.getPhone(),
                     userModel.getDateCreated(),
@@ -98,7 +98,7 @@ public class UserDAO extends DataDAO implements UserInterface {
                     userModel.getUserName(),
                     userModel.getPassword(),
                     userModel.getGender(),
-                    userModel.getIdRole(),
+                    userModel.getRole(),
                     userModel.getEmail(),
                     userModel.getPhone(),
                     userModel.getDateCreated(),
@@ -122,5 +122,10 @@ public class UserDAO extends DataDAO implements UserInterface {
             throw new RuntimeException(e);
         }
         return rs;
+    }
+
+    @Override
+    public boolean updatePassword(String username) {
+        return false;
     }
 }

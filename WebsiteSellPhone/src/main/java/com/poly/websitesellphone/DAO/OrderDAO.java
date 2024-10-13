@@ -2,6 +2,7 @@ package com.poly.websitesellphone.DAO;
 
 import com.poly.websitesellphone.Service.OrderInterface;
 import com.poly.websitesellphone.model.OrderModel;
+import com.poly.websitesellphone.model.UserModel;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -70,7 +71,9 @@ public class OrderDAO extends DataDAO implements OrderInterface {
                 Date dateCreated = rs.getDate(COLUMN_DATE_CREATED);
                 int status = rs.getInt(COLUMN_STATUS);
                 double totalAmount = rs.getDouble(COLUMN_TOTAL_AMOUNT);
-                orderModel = new OrderModel(idOrder, idUser, phone, address, fullName, dateCreated, status, totalAmount);
+                UserDAO userDAO = new UserDAO();
+                UserModel userModel = userDAO.selectById(idUser);
+                orderModel = new OrderModel(idOrder, phone, address, fullName, dateCreated, status, totalAmount, userModel);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -84,7 +87,7 @@ public class OrderDAO extends DataDAO implements OrderInterface {
         try {
             Connection connection = getConnection();
             update(ORDER_INSERT,
-                    orderModel.getIdUser(),
+                    orderModel.getUserModel().getIdUser(),
                     orderModel.getPhone(),
                     orderModel.getAddress(),
                     orderModel.getFullName(),

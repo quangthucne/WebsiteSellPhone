@@ -4,20 +4,20 @@ import java.util.List;
 
 public class OrderDetailModel {
     private int idOrderDetail;
+    private int idOrder;
+    private int idProduct;
     private int price;
     private int quantity;
-    private OrderModel order;
-    private List<ProductModel> listProduct;
 
+    public OrderDetailModel() {
+    }
 
-    public OrderDetailModel() {}
-
-    public OrderDetailModel(int idOrderDetail, int price, int quantity, OrderModel order, List<ProductModel> listProduct) {
+    public OrderDetailModel(int idOrderDetail, int idOrder, int idProduct, int price, int quantity) {
         this.idOrderDetail = idOrderDetail;
+        this.idOrder = idOrder;
+        this.idProduct = idProduct;
         this.price = price;
         this.quantity = quantity;
-        this.order = order;
-        this.listProduct = listProduct;
     }
 
     public int getIdOrderDetail() {
@@ -26,6 +26,22 @@ public class OrderDetailModel {
 
     public void setIdOrderDetail(int idOrderDetail) {
         this.idOrderDetail = idOrderDetail;
+    }
+
+    public int getIdOrder() {
+        return idOrder;
+    }
+
+    public void setIdOrder(int idOrder) {
+        this.idOrder = idOrder;
+    }
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
     }
 
     public int getPrice() {
@@ -42,21 +58,5 @@ public class OrderDetailModel {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public OrderModel getOrder() {
-        return order;
-    }
-
-    public void setOrder(OrderModel order) {
-        this.order = order;
-    }
-
-    public List<ProductModel> getListProduct() {
-        return listProduct;
-    }
-
-    public void setListProduct(List<ProductModel> listProduct) {
-        this.listProduct = listProduct;
     }
 }

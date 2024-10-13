@@ -28,25 +28,19 @@ public interface ProductInterface {
     String PRODUCT_DELETE = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME_PRODUCT, COLUMN_ID_PRODUCT);
 
 // check query before excute()
-    String PRODUCT_SELECT_ALL = String.format("SELECT * " +
-                    "FROM %s p JOIN %s c on p.%s = c.%s JOIN (SELECT %s, %s , MIN(%s) " +
-                    "FROM %s " +
-                    "GROUP BY %s, %s) %s on p.%s = %s.%s",
+    String PRODUCT_SELECT_ALL = String.format("SELECT p.%s , c.%s, p.%s, p.%s, p.%s, p.%s, p.%s, p.%s, p.%s, c.%s, %s.%s" +
+        "FROM %s p \n" +
+        "JOIN %s c on p.%s = c.%s \n" +
+        "JOIN (SELECT %s, %s, MIN(%s) \n" +
+        "    FROM %s \n" +
+        "    GROUP BY %s, %s) %s  on p.%s = %s.%s",
+            COLUMN_ID_PRODUCT, COLUMN_ID_CATEGORY, COLUMN_NAME, COLUMN_SHORT_DESC, COLUMN_DETAIL, COLUMN_QUANTITY, COLUMN_PRICE, COLUMN_DATE_CREATED, COLUMN_STATUS, COLUMN_NAME_CATEGORY, TABLE_NAME_IMAGE, COLUMN_NAME_IMAGE,
             TABLE_NAME_PRODUCT,
-            TABLE_NAME_CATEGORY,
-            COLUMN_ID_CATEGORY,
-            COLUMN_ID_CATEGORY,
-            COLUMN_ID_PRODUCT,
-            COLUMN_ID_IMAGE,
-            COLUMN_NAME_IMAGE,
+            TABLE_NAME_CATEGORY, COLUMN_ID_PRODUCT, COLUMN_ID_PRODUCT,
+            COLUMN_ID_PRODUCT, COLUMN_ID_IMAGE, COLUMN_NAME_IMAGE,
             TABLE_NAME_IMAGE,
-            COLUMN_ID_PRODUCT,
-            COLUMN_ID_IMAGE,
-            TABLE_NAME_IMAGE,
-            COLUMN_ID_PRODUCT,
-            TABLE_NAME_IMAGE,
-            COLUMN_ID_PRODUCT
-    );
+            COLUMN_ID_PRODUCT, COLUMN_ID_IMAGE, TABLE_NAME_IMAGE, COLUMN_ID_PRODUCT, TABLE_NAME_IMAGE, COLUMN_ID_PRODUCT
+        );
 
     public List<ProductModel> selectAll();
 
