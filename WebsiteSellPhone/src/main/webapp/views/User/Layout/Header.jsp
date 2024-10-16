@@ -23,7 +23,6 @@
 			<!-- Logo và tên Phone Store -->
 		 <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
             <img src="views/User/Layout/Img/logonew.png" alt="Logo" style="width: 60px; height: 60px;" class="me-2">
-            <span class="fs-5 " style="line-height: 50px;">Phone Store</span>
         </a>
 
 			<!-- Navbar và Icon -->
