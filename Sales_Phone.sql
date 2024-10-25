@@ -1,6 +1,6 @@
 ﻿USE master;
-CREATE DATABASE sales_phone;
-USE sales_phone;
+CREATE DATABASE dino_store;
+USE dino_store;
 
 
 CREATE TABLE [user] (
@@ -67,8 +67,7 @@ CREATE TABLE [order] (
     address NVARCHAR(255),
     full_name NVARCHAR(255),
     date_created DATE,
-    status_order BIT,
-    total_amount INT,
+    status_order INT,
     FOREIGN KEY (id_user) REFERENCES [User](id_user)
 );
 
@@ -89,12 +88,13 @@ CREATE TABLE image (
     FOREIGN KEY (id_product) REFERENCES Product(id_product)
 );
 
+
+
 -- data
 
 -- Insert data for user table (Admin user)
 INSERT INTO [user] (full_name, username, password, gender, role, email, phone, date_created, status_user)
-VALUES ('Admin User', 'user', '12345678', 1, 0, 'admin@phoneweb.com', '1234567890', GETDATE(), 1);
-VALUES ('Admin User', 'admin', 'admin_password_hash', 1, 1, 'admin@phoneweb.com', '1234567890', GETDATE(), 1);
+VALUES ('Admin', 'admin', '12345678', 1, 1, 'admin@phoneweb.com', '1234567890', GETDATE(), 1);
 
 SELECT * FROM [user]
 
@@ -154,7 +154,10 @@ VALUES
 -- Insert data for order table
 INSERT INTO [order] (id_user, phone, address, full_name, date_created, status_order, total_amount)
 VALUES 
-(1, '1234567890', '123 Admin St, City', 'Admin User', GETDATE(), 1, 1798);
+(4, '1234567890', '123 Admin St, City', 'Admin User', GETDATE(), 4, 1798),
+(2, '1234567890', '123 Admin St, City', 'Admin User', GETDATE(), 2, 1798),
+(3, '1234567890', '123 Admin St, City', 'Admin User', GETDATE(), 3, 1798);
+
 
 -- Insert data for order_detail table
 INSERT INTO order_detail (id_order, id_product, price, quantity)
@@ -166,6 +169,7 @@ VALUES
 INSERT INTO address (id_user, phone, address, full_name)
 VALUES 
 (1, '1234567890', '123 Admin St, City', 'Admin User');
+
 
 
 
@@ -184,6 +188,11 @@ FROM Product p JOIN Category c on p.id_category = c.id_category JOIN (SELECT id_
         FROM Image 
         GROUP BY id_product, id_image) Image on p.id_product = Image.id_product
 
+SELECT *
+FROM product p JOIN category c on p.id_category = c.id_category JOIN (SELECT id_product, id_image, MIN(name_image) as name 
+        FROM image 
+        GROUP BY id_product, id_image) image on p.id_product = image.id_product
+
 
 SELECT p.%s , c.%s, p.%s, p.%s, p.%s, p.%s, p.%s, p.%s, p.%s, c.%s, IMAGE.%s 
 FROM Product p 
@@ -195,3 +204,141 @@ JOIN (SELECT id_product, id_image, MIN(name_image) as name
 
 
 SELECT DISTINCT * from [Order] o INNER join  [User] u on o.id_user = u.id_user
+
+SELECT * FROM category
+
+SELECT * FROM product
+SELECT * FROM IMAGE
+
+
+
+SELECT product.id_product , product.id_category, product.name_product, product.short_desc, product.detail, product.quantity, product.price, product.date_created, product.status_product, category.name_category, [image].name_image FROM product INNER JOIN category  ON product.id_category = category.id_category INNER JOIN (SELECT id_product, id_image, MIN(name_image) as name_image FROM [image] GROUP BY id_product, id_image ) [image]  ON product.id_product = [image].id_product 
+
+
+SELECT product.id_product, product.id_category, product.name_product, product.short_desc, product.detail, product.quantity, product.price, product.date_created, product.status_product, category.name_category, img.name_image FROM product 
+INNER JOIN category ON product.id_category = category.id_category 
+INNER JOIN (SELECT id_product, name_image, ROW_NUMBER() OVER (PARTITION BY id_product ORDER BY id_image) AS row_num FROM [image]) AS img ON product.id_product = img.id_product AND img.row_num = 1 INNER JOIN cart_detail cd ON cd.id_product = product.id_product WHERE cd.id_cart = 1
+
+
+SELECT product.id_product , product.id_category, product.name_product, product.short_desc, product.detail, product.quantity, product.price, product.date_created, product.status_product, category.name_category, img.name_image FROM product INNER JOIN category  ON product.id_category = category.id_category INNER JOIN (SELECT id_product, name_image, ROW_NUMBER() OVER (PARTITION BY id_product ORDER BY name_image) AS row_num FROM [image]) as img on product.id_product = [img].id_product AND img.row_num = 1
+
+SELECT * FROM Product WHERE id_product = 14
+SELECT * FROM [image]
+
+DELETE from product WHERE id_product =
+
+SELECT * FROM [user]
+SELECT * FROM cart
+
+SELECT * FROM address
+
+SELECT * FROM [order]
+
+SELECT * FROM order_detail
+
+SELECT * FROM [orderd]
+
+
+SELECT * FROM cart_detail WHERE id_cart = 2
+
+delete from [user] WHERE id_user = 33
+
+SELECT COUNT(*) FROM [user] WHERE email = 'quangthucdz@gmail.com'
+
+SELECT product.id_product , product.id_category, product.name_product, product.short_desc, product.detail, product.quantity, product.price, product.date_created, product.status_product, category.name_category, img.name_image FROM product INNER JOIN category  ON product.id_category = category.id_category INNER JOIN (SELECT id_product, name_image, ROW_NUMBER() OVER (PARTITION BY id_product ORDER BY name_image) AS row_num FROM [image]) AS img ON product.id_product = img.id_product AND img.row_num = 1 INNER JOIN cart_detail cd ON cd.id_product = product.id_product WHERE cd.id_cart = 2;
+
+
+
+SELECT 
+    o.phone,
+    o.address,
+    o.full_name,
+    od.id_product,
+    od.price,
+    od.quantity,
+    o.date_created,
+    o.status_order,
+    (od.quantity * od.price) AS total_price
+FROM 
+    [order] o
+JOIN 
+    order_detail od ON o.id_order = od.id_order;
+
+
+
+SELECT 
+    o.*,
+    od.id_product,
+    od.price,
+    od.quantity,
+    (od.quantity * od.price) AS total_price
+FROM 
+    [order] o
+JOIN 
+    order_detail od ON o.id_order = od.id_order;
+
+    SELECT 
+    o.id_order,
+    o.phone,
+    o.address,
+    o.full_name,
+    o.date_created,
+    o.status_order,
+    SUM(od.quantity * od.price) AS total_price
+FROM 
+    [order] o
+JOIN 
+    order_detail od ON o.id_order = od.id_order
+GROUP BY 
+    o.id_order, 
+    o.phone, 
+    o.address, 
+    o.full_name, 
+    o.date_created, 
+    o.status_order;
+
+
+
+SELECT p.id_product, 
+       p.name_product, 
+       p.short_desc, 
+       p.detail, 
+       p.quantity, 
+       p.price, 
+       p.date_created, 
+       p.status_product,
+       img.name_image
+FROM product p
+LEFT JOIN (
+    SELECT i.id_product, i.name_image,
+           ROW_NUMBER() OVER (PARTITION BY i.id_product ORDER BY i.id_image DESC) AS rn
+    FROM image i
+) img ON p.id_product = img.id_product
+WHERE p.id_product = ? 
+  AND img.rn = 1;
+
+  CREATE TRIGGER trg_update_product_quantity
+ON order_detail
+AFTER INSERT
+AS
+BEGIN
+    -- Update the product quantity
+    UPDATE product
+    SET product.quantity = product.quantity - inserted.quantity
+    FROM product
+    INNER JOIN inserted ON product.id_product = inserted.id_product
+    WHERE product.quantity >= inserted.quantity;
+    
+    -- Optional: Check if the product quantity becomes negative
+    IF EXISTS (
+        SELECT 1
+        FROM product
+        INNER JOIN inserted ON product.id_product = inserted.id_product
+        WHERE product.quantity < 0
+    )
+    BEGIN
+        -- If the quantity becomes negative, rollback the operation
+        RAISERROR ('Not enough product quantity available for this order.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;

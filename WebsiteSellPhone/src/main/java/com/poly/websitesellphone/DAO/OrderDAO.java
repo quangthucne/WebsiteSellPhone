@@ -49,7 +49,7 @@ public class OrderDAO extends DataDAO implements OrderInterface {
                 Date dateCreated = rs.getDate(COLUMN_DATE_CREATED);
                 int status = rs.getInt(COLUMN_STATUS);
                 double totalAmount = rs.getDouble(COLUMN_TOTAL_AMOUNT);
-                orderModel = new OrderModel(idOrder, phone, address, fullName, dateCreated, status, totalAmount,);
+                orderModel = new OrderModel(idOrder, phone, address, fullName, dateCreated, status, totalAmount);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
