@@ -1,5 +1,7 @@
 package com.poly.websitesellphone.DAO;
 
+
+
 import com.poly.websitesellphone.Service.UserInterface;
 import com.poly.websitesellphone.model.AdressModel;
 import com.poly.websitesellphone.model.UserModel;
@@ -21,14 +23,12 @@ public class UserDAO extends DataDAO implements UserInterface {
                 String userName = rs.getString(COLUNM_USER_NAME);
                 String password = rs.getString(COLUMN_PASSWORD);
                 int gender = rs.getInt(COLUMN_GENDER);
-                int idRole = rs.getInt(COLUMN_ID_ROLE);
+                int role = rs.getInt(COLUMN_ROLE);
                 String email = rs.getString(COLUMN_EMAIL);
                 String phone = rs.getString(COLUMN_PHONE);
                 Date dateCreated = rs.getDate(COLUMN_DATE_CREATED);
                 int status = rs.getInt(COLUMN_STATUS);
-                AdressDAO adressDAO = new AdressDAO();
-                List<AdressModel> adressModelList = adressDAO.selectByIdUser(id);
-                list.add(new UserModel(id, fullName, userName, password, gender, idRole, email, phone, dateCreated, status,adressModelList));
+                list.add(new UserModel(id, fullName, userName, password, gender, role, email, phone, dateCreated, status));
             }
             con.close();
         } catch (SQLException e) {
@@ -42,7 +42,7 @@ public class UserDAO extends DataDAO implements UserInterface {
     @Override
     public UserModel selectById(int id) {
         UserModel userModel = null;
-        try(Connection con = getConnection()) {
+        try (Connection con = getConnection()) {
             ResultSet rs = query(USER_SELECT_BY_ID, id);
             while (rs.next()) {
                 int idUser = rs.getInt(COLUMN_ID_USER);
@@ -50,14 +50,14 @@ public class UserDAO extends DataDAO implements UserInterface {
                 String userName = rs.getString(COLUNM_USER_NAME);
                 String password = rs.getString(COLUMN_PASSWORD);
                 int gender = rs.getInt(COLUMN_GENDER);
-                int idRole = rs.getInt(COLUMN_ID_ROLE);
+                int role = rs.getInt(COLUMN_ROLE);
                 String email = rs.getString(COLUMN_EMAIL);
                 String phone = rs.getString(COLUMN_PHONE);
                 Date dateCreated = rs.getDate(COLUMN_DATE_CREATED);
                 int status = rs.getInt(COLUMN_STATUS);
                 AdressDAO adressDAO = new AdressDAO();
                 List<AdressModel> adressModelList = adressDAO.selectByIdUser(idUser);
-                userModel = new UserModel(idUser, fullName, userName, password, gender, idRole, email, phone, dateCreated, status, adressModelList);
+                userModel = new UserModel(idUser, fullName, userName, password, gender, role, email, phone, dateCreated, status, adressModelList);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -66,9 +66,35 @@ public class UserDAO extends DataDAO implements UserInterface {
     }
 
     @Override
+    public UserModel selectByUsername(String username) {
+        UserModel userModel = null;
+        try (Connection con = getConnection()) {
+            ResultSet rs = query(USER_SELECT_BY_USERNAME, username);
+            while (rs.next()) {
+                int idUser = rs.getInt(COLUMN_ID_USER);
+                String fullName = rs.getString(COLUMN_FULL_NAME);
+                String userName = rs.getString(COLUNM_USER_NAME);
+                String password = rs.getString(COLUMN_PASSWORD);
+                int gender = rs.getInt(COLUMN_GENDER);
+                int role = rs.getInt(COLUMN_ROLE);
+                String email = rs.getString(COLUMN_EMAIL);
+                String phone = rs.getString(COLUMN_PHONE);
+                Date dateCreated = rs.getDate(COLUMN_DATE_CREATED);
+                int status = rs.getInt(COLUMN_STATUS);
+                AdressDAO adressDAO = new AdressDAO();
+                List<AdressModel> adressModelList = adressDAO.selectByIdUser(idUser);
+                userModel = new UserModel(idUser, fullName, userName, password, gender, role, email, phone, dateCreated, status, adressModelList);
+            }
+        } catch (SQLException e) {
+            userModel = null;
+        }
+        return userModel;
+    }
+
+    @Override
     public boolean insert(UserModel userModel) {
         boolean rs = false;
-        try{
+        try {
             Connection con = getConnection();
             update(USER_INSERT,
                     userModel.getFullName(),
@@ -78,7 +104,6 @@ public class UserDAO extends DataDAO implements UserInterface {
                     userModel.getRole(),
                     userModel.getEmail(),
                     userModel.getPhone(),
-                    userModel.getDateCreated(),
                     userModel.getStatus()
             );
             rs = true;
@@ -88,20 +113,61 @@ public class UserDAO extends DataDAO implements UserInterface {
         return rs;
     }
 
+    public int insertGetGeneratedID(UserModel userModel) {
+        int generatedID = -1;
+        try {
+            Connection con = getConnection();
+            PreparedStatement statement = con.prepareStatement(USER_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setString(1, userModel.getFullName());
+            statement.setString(2, userModel.getUserName());
+            statement.setString(3, userModel.getPassword());
+            statement.setInt(4, userModel.getGender());
+            statement.setInt(5, userModel.getRole());
+            statement.setString(6, userModel.getEmail());
+            statement.setString(7, userModel.getPhone());
+            statement.setInt(8, userModel.getStatus());
+
+            // Thực thi cập nhật
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                ResultSet rs = statement.getGeneratedKeys();
+                if (rs.next()) {
+                    generatedID = rs.getInt(1);
+                }
+                rs.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return generatedID;
+        }
+        return generatedID;
+    }
+
+
     @Override
     public boolean update(UserModel userModel) {
         boolean rs = false;
         try {
             Connection con = getConnection();
-            update(USER_UPDATE,
+            update(USER_UPDATE_MANAGER,
                     userModel.getFullName(),
-                    userModel.getUserName(),
-                    userModel.getPassword(),
                     userModel.getGender(),
-                    userModel.getRole(),
                     userModel.getEmail(),
                     userModel.getPhone(),
-                    userModel.getDateCreated(),
+                    userModel.getStatus(),
+                    userModel.getIdUser()
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+
+    public boolean updateStatus(UserModel userModel) {
+        boolean rs = false;
+        try {
+            Connection con = getConnection();
+            update(USER_UPDATE_STATUS,
                     userModel.getStatus(),
                     userModel.getIdUser()
             );
@@ -112,11 +178,11 @@ public class UserDAO extends DataDAO implements UserInterface {
     }
 
     @Override
-    public boolean delete(UserModel userModel) {
+    public boolean delete(int idUser) {
         boolean rs = false;
         try {
             Connection con = getConnection();
-            update(USER_DELETE, userModel.getIdUser());
+            update(USER_DELETE, idUser);
             rs = true;
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -125,7 +191,36 @@ public class UserDAO extends DataDAO implements UserInterface {
     }
 
     @Override
-    public boolean updatePassword(String username) {
+    public boolean updatePassword(UserModel userModel) {
+        return false;
+    }
+
+
+    public boolean isEmailExist(String email, int idUser) {
+        String query = "SELECT * FROM [user] WHERE email = ? AND id_user != ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, email);
+            ps.setInt(2, idUser);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isPhoneExist(String phone, int idUser) {
+        String query = "SELECT * FROM [user] WHERE phone = ? AND id_user != ?";
+        try (Connection conn = getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setString(1, phone);
+            ps.setInt(2, idUser);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return false;
     }
 }

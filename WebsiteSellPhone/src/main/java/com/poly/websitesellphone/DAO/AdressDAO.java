@@ -1,10 +1,10 @@
 package com.poly.websitesellphone.DAO;
 
+
 import com.poly.websitesellphone.Service.AdressInterface;
 import com.poly.websitesellphone.model.AdressModel;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,11 +38,11 @@ public class AdressDAO extends DataDAO implements AdressInterface {
             Connection con = getConnection();
             ResultSet rs = query(ADRESS_SELECT_BY_ID, id);
             while (rs.next()) {
-                int idAddress = rs.getInt("id_address");
-                int idUser = rs.getInt("id_user");
-                String phone = rs.getString("phone");
-                String address = rs.getString("address");
-                String fullName = rs.getString("full_name");
+                int idAddress = rs.getInt(COLUMN_ID_ADRESS);
+                int idUser = rs.getInt(COLUMN_ID_USER);
+                String phone = rs.getString(COLUMN_PHONE);
+                String address = rs.getString(COLUMN_ADDRESS);
+                String fullName = rs.getString(COLUMN_FULL_NAME);
                 adressModel = new AdressModel(idAddress, idUser, phone, address, fullName);
             }
         } catch (SQLException e) {
@@ -58,10 +58,10 @@ public class AdressDAO extends DataDAO implements AdressInterface {
             Connection con = getConnection();
             ResultSet rs = query(ADRESS_SELECT_BY_ID_USER, idUser);
             while (rs.next()) {
-                int idAddress = rs.getInt("id_address");
-                String phone = rs.getString("phone");
-                String address = rs.getString("address");
-                String fullName = rs.getString("full_name");
+                int idAddress = rs.getInt(COLUMN_ID_ADRESS);
+                String phone = rs.getString(COLUMN_PHONE);
+                String address = rs.getString(COLUMN_ADDRESS);
+                String fullName = rs.getString(COLUMN_FULL_NAME);
                 list.add(new AdressModel(idAddress, idUser, phone, address, fullName));
             }
         } catch (SQLException e) {
@@ -93,8 +93,7 @@ public class AdressDAO extends DataDAO implements AdressInterface {
         boolean rs = false;
         try {
             Connection con = getConnection();
-            update(ADRESS_INSERT,
-                    adressModel.getIdUser(),
+            update(ADRESS_UPDATE,
                     adressModel.getPhone(),
                     adressModel.getAdress(),
                     adressModel.getFullName(),
@@ -108,12 +107,12 @@ public class AdressDAO extends DataDAO implements AdressInterface {
     }
 
     @Override
-    public boolean delete(AdressModel adressModel) {
+    public boolean delete(int idAddress) {
         boolean rs = false;
         try {
             Connection con = getConnection();
             update(ADRESS_DELETE,
-                    adressModel.getIdAddress()
+                    idAddress
             );
         } catch (Exception e) {
             throw new RuntimeException(e);

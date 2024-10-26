@@ -15,11 +15,40 @@ public class UserModel {
     private Date dateCreated;
     private int status;
 
+
     private List<AdressModel> adressList;
 
-    public UserModel(){}
 
-    public UserModel(int idUser, String fullName, String userName, String password, int gender, int idRole, String email, String phone, Date dateCreated, int status, List<AdressModel> adressList) {
+    public UserModel() {
+    }
+
+    public UserModel(int idUser, int status) {
+        this.idUser = idUser;
+        this.status = status;
+    }
+
+    public UserModel(int idUser, String fullName, int gender, String email, String phone) {
+        this.idUser = idUser;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public UserModel(int idUser, String fullName, String userName, String password, int gender, int role, String email, String phone, Date dateCreated, int status) {
+        this.idUser = idUser;
+        this.fullName = fullName;
+        this.userName = userName;
+        this.password = password;
+        this.gender = gender;
+        this.role = role;
+        this.email = email;
+        this.phone = phone;
+        this.dateCreated = dateCreated;
+        this.status = status;
+    }
+
+    public UserModel(int idUser, String fullName, String userName, String password, int gender, int role, String email, String phone, Date dateCreated, int status, List<AdressModel> adressList) {
         this.idUser = idUser;
         this.fullName = fullName;
         this.userName = userName;
@@ -31,6 +60,26 @@ public class UserModel {
         this.dateCreated = dateCreated;
         this.status = status;
         this.adressList = adressList;
+    }
+
+    public UserModel(String fullName, String userName, String password, int gender, int role, String email, String phone, int status) {
+        this.fullName = fullName;
+        this.userName = userName;
+        this.password = password;
+        this.gender = gender;
+        this.role = role;
+        this.email = email;
+        this.phone = phone;
+        this.status = status;
+    }
+
+    public UserModel(String fullName, int gender, String email, String phone, int status, int idUser) {
+        this.fullName = fullName;
+        this.gender = gender;
+        this.email = email;
+        this.phone = phone;
+        this.status = status;
+        this.idUser = idUser;
     }
 
     public int getIdUser() {

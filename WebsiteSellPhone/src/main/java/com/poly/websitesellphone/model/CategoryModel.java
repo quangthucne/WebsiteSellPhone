@@ -15,6 +15,11 @@ public class CategoryModel {
         this.status = status;
     }
 
+    public CategoryModel(String name, int status) {
+        this.name = name;
+        this.status = status;
+    }
+
     public int getIdCategory() {
         return idCategory;
     }

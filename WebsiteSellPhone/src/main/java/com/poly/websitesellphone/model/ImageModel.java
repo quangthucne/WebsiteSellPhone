@@ -14,6 +14,11 @@ public class ImageModel {
         this.nameImage = nameImage;
     }
 
+    public ImageModel(int idProduct, String nameImage) {
+        this.idProduct = idProduct;
+        this.nameImage = nameImage;
+    }
+
     public int getIdImage() {
         return idImage;
     }

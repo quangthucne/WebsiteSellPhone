@@ -1,9 +1,9 @@
 package com.poly.websitesellphone.DAO;
 
+
 import com.poly.websitesellphone.Service.ImageInterface;
 import com.poly.websitesellphone.model.ImageModel;
 
-import java.awt.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -104,6 +104,19 @@ public class ImageDAO extends DataDAO implements ImageInterface {
         try {
             Connection con = getConnection();
             update(IMAGE_DELETE, idImage);
+            rs = true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+
+    @Override
+    public boolean deleteByProductId(int idProduct) {
+        boolean rs = false;
+        try {
+            Connection con = getConnection();
+            update(IMAGE_DELETE_PRODUCT, idProduct);
             rs = true;
         } catch (Exception e) {
             throw new RuntimeException(e);

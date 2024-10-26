@@ -18,6 +18,13 @@ public class AdressModel {
         this.fullName = fullName;
     }
 
+    public AdressModel(int idUser, String phone, String adress, String fullName) {
+        this.idUser = idUser;
+        this.phone = phone;
+        this.adress = adress;
+        this.fullName = fullName;
+    }
+
     public int getIdAddress() {
         return idAddress;
     }

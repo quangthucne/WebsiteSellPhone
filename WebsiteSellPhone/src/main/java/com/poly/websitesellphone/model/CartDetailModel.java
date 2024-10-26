@@ -6,13 +6,31 @@ public class CartDetailModel {
     private int idProduct;
     private int quantityProduct;
 
-    public CartDetailModel() {}
+
+    private ProductModel productModelList;
+
+    public CartDetailModel() {
+    }
 
     public CartDetailModel(int idCartDetail, int idCart, int idProduct, int quantityProduct) {
         this.idCartDetail = idCartDetail;
         this.idCart = idCart;
         this.idProduct = idProduct;
         this.quantityProduct = quantityProduct;
+    }
+
+    public CartDetailModel(int idCart, int idProduct, int quantityProduct) {
+        this.idCart = idCart;
+        this.idProduct = idProduct;
+        this.quantityProduct = quantityProduct;
+    }
+
+    public CartDetailModel(int idCartDetail, int idCart, int idProduct, int quantityProduct, ProductModel productModelList) {
+        this.idCartDetail = idCartDetail;
+        this.idCart = idCart;
+        this.idProduct = idProduct;
+        this.quantityProduct = quantityProduct;
+        this.productModelList = productModelList;
     }
 
     public int getIdCartDetail() {
@@ -45,5 +63,13 @@ public class CartDetailModel {
 
     public void setQuantityProduct(int quantityProduct) {
         this.quantityProduct = quantityProduct;
+    }
+
+    public ProductModel getProductModelList() {
+        return productModelList;
+    }
+
+    public void setProductModelList(ProductModel productModelList) {
+        this.productModelList = productModelList;
     }
 }

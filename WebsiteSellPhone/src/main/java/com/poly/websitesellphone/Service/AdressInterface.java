@@ -1,12 +1,13 @@
 package com.poly.websitesellphone.Service;
 
+
 import com.poly.websitesellphone.model.AdressModel;
 
 import java.util.List;
 
 public interface AdressInterface {
-    String TABLE_NAME = "adress";
-    String COLUMN_ID_ADRESS = "id_adress";
+    String TABLE_NAME = "address";
+    String COLUMN_ID_ADRESS = "id_address";
     String COLUMN_ID_USER = "id_user";
     String COLUMN_PHONE = "phone";
     String COLUMN_ADDRESS = "address";
@@ -16,7 +17,7 @@ public interface AdressInterface {
     String ADRESS_SELECT_BY_ID = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID_ADRESS);
     String ADRESS_SELECT_BY_ID_USER = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID_USER);
     String ADRESS_INSERT = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?)", TABLE_NAME, COLUMN_ID_USER, COLUMN_PHONE, COLUMN_ADDRESS, COLUMN_FULL_NAME);
-    String ADRESS_UPDATE = String.format("UPDATE %s SET %s = ?, SET %s = ?, SET %s = ?, SET %s = ?  WHERE %s = ?", TABLE_NAME, COLUMN_ID_USER, COLUMN_PHONE, COLUMN_ADDRESS, COLUMN_FULL_NAME, COLUMN_ID_ADRESS);
+    String ADRESS_UPDATE = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?  WHERE %s = ?", TABLE_NAME, COLUMN_PHONE, COLUMN_ADDRESS, COLUMN_FULL_NAME, COLUMN_ID_ADRESS);
     String ADRESS_DELETE = String.format("DELETE FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID_ADRESS);
 
     public List<AdressModel> selectAll();
@@ -29,5 +30,5 @@ public interface AdressInterface {
 
     public boolean update(AdressModel adressModel);
 
-    public boolean delete(AdressModel adressModel);
+    public boolean delete(int idAddress);
 }

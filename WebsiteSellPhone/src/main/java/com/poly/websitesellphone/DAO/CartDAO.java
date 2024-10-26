@@ -1,6 +1,8 @@
 package com.poly.websitesellphone.DAO;
 
+
 import com.poly.websitesellphone.Service.CartInterface;
+import com.poly.websitesellphone.model.CartDetailModel;
 import com.poly.websitesellphone.model.CartModel;
 
 import java.sql.Connection;
@@ -28,7 +30,7 @@ public class CartDAO extends DataDAO implements CartInterface {
     }
 
     @Override
-    public CartModel selectById(String idCart) {
+    public CartModel selectById(int idCart) {
         CartModel cartModel = null;
         try {
             Connection conn = getConnection();
@@ -36,7 +38,9 @@ public class CartDAO extends DataDAO implements CartInterface {
             while (rs.next()) {
                 int id = rs.getInt(COLUMN_ID_CART);
                 int idUser = rs.getInt(COLUMN_ID_USER);
-                cartModel = new CartModel(id, idUser);
+                CartDetailDAO cartDetailDAO = new CartDetailDAO();
+                List<CartDetailModel> cartDetailModelList = cartDetailDAO.selectByIdCart(idCart);
+                cartModel = new CartModel(id, idUser, cartDetailModelList);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -45,7 +49,7 @@ public class CartDAO extends DataDAO implements CartInterface {
     }
 
     @Override
-    public CartModel selectByIdUser(String idUser) {
+    public CartModel selectByIdUser(int idUser) {
         CartModel cartModel = null;
         try {
             Connection conn = getConnection();
@@ -53,11 +57,26 @@ public class CartDAO extends DataDAO implements CartInterface {
             while (rs.next()) {
                 int idCart = rs.getInt(COLUMN_ID_CART);
                 int id = rs.getInt(COLUMN_ID_USER);
-                cartModel = new CartModel(idCart, id);
+                CartDetailDAO cartDetailDAO = new CartDetailDAO();
+                List<CartDetailModel> list = cartDetailDAO.selectByIdCart(idCart);
+                cartModel = new CartModel(idCart, id, list);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return cartModel;
+    }
+
+    @Override
+    public boolean insert(int idUser) {
+        boolean result = false;
+        try {
+            Connection conn = getConnection();
+            update(CART_INSERT, idUser);
+            result = true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 }

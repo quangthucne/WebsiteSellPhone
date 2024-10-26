@@ -1,7 +1,9 @@
 package com.poly.websitesellphone.DAO;
 
+
 import com.poly.websitesellphone.Service.OrderDetailInterface;
 import com.poly.websitesellphone.model.OrderDetailModel;
+import com.poly.websitesellphone.model.ProductModel;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,22 +33,25 @@ public class OrderDetailDAO extends DataDAO implements OrderDetailInterface {
     }
 
     @Override
-    public OrderDetailModel selectById(int idOrderDetail) {
-        OrderDetailModel orderDetailModel = null;
+    public List<OrderDetailModel> selectById(int idOrder) {
+        List<OrderDetailModel> list = new ArrayList<>();
         try {
             Connection connection = getConnection();
-            ResultSet rs = query(ORDER_DETAIL_SELECT_BY_ID, idOrderDetail);
+            ResultSet rs = query(ORDER_DETAIL_SELECT_BY_ID, idOrder);
             while (rs.next()) {
-                int idOrder = rs.getInt(COLUMN_ID_ORDER);
+                int idOrderDetail = rs.getInt(COLUMN_ID_ORDER_DETAIL);
                 int idProduct = rs.getInt(COLUMN_ID_PRODUCT);
                 int price = rs.getInt(COLUMN_PRICE);
                 int quantity = rs.getInt(COLUMN_QUANTITY);
-                orderDetailModel = new OrderDetailModel(idOrderDetail, idOrder, idProduct, price, quantity);
+                ProductDAO productDAO = new ProductDAO();
+                ProductModel productModel = productDAO.selectId(idProduct);
+                System.out.println(productModel.getNameImage());
+                list.add(new OrderDetailModel(idOrderDetail, idOrder, idProduct, price, quantity, productModel));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return orderDetailModel;
+        return list;
     }
 
     @Override
@@ -55,7 +60,7 @@ public class OrderDetailDAO extends DataDAO implements OrderDetailInterface {
         try {
             Connection connection = getConnection();
             ResultSet rs = query(ORDER_DETAIL_SELECT_BY_ID_PRODUCT, idProduct);
-            while (rs.next()){
+            while (rs.next()) {
                 int idOrderDetail = rs.getInt(COLUMN_ID_ORDER_DETAIL);
                 int idOrder = rs.getInt(COLUMN_ID_ORDER);
                 int price = rs.getInt(COLUMN_PRICE);

@@ -1,10 +1,10 @@
 package com.poly.websitesellphone.DAO;
 
+
 import com.poly.websitesellphone.Service.CategoryInterface;
 import com.poly.websitesellphone.model.CategoryModel;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -31,6 +31,24 @@ public class CategoryDAO extends DataDAO implements CategoryInterface {
     }
 
     @Override
+    public List<CategoryModel> selectAllByStatus(int status) {
+        List<CategoryModel> list = new ArrayList<>();
+        try {
+            Connection con = getConnection();
+            ResultSet rs = query(CATEGORY_SELECT_ALL_BY_STATUS, status);
+            while (rs.next()) {
+                int idCategory = rs.getInt(COLUMN_ID);
+                String name = rs.getString(COLUMN_NAME);
+                list.add(new CategoryModel(idCategory, name, status));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
+    }
+
+    @Override
     public CategoryModel selectById(int id) {
         CategoryModel categoryModel = null;
         try {
@@ -45,6 +63,25 @@ public class CategoryDAO extends DataDAO implements CategoryInterface {
             throw new RuntimeException(e);
         }
         return categoryModel;
+    }
+
+    @Override
+    public List<CategoryModel> selectByName(String nameCategory) {
+        List<CategoryModel> list = new ArrayList<>();
+        try {
+            Connection con = getConnection();
+            ResultSet rs = query(CATEGORY_SELECT_BY_NAME, nameCategory);
+            while (rs.next()) {
+                int idCategory = rs.getInt(COLUMN_ID);
+                String name = rs.getString(COLUMN_NAME);
+                int status = rs.getInt(COLUMN_STATUS);
+                list.add(new CategoryModel(idCategory, name, status));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return list;
     }
 
     @Override

@@ -10,16 +10,50 @@ public class ProductModel {
     private String shortDesc;
     private String detail;
     private int quantity;
-    private double price;
+    private int price;
     private Date dateCreate;
     private int status;
-
+    private ImageModel image;
     private List<ImageModel> listImage;
+    private String nameImage;
 
     public ProductModel() {
     }
 
-    public ProductModel(int idProduct, int idCategory, String name, String shortDesc, String detail, int quantity, double price, Date dateCreate, int status, List<ImageModel> listImage) {
+    public ProductModel(int idProduct, int idCategory, String name, String shortDesc, String detail, int price, int status) {
+        this.idProduct = idProduct;
+        this.idCategory = idCategory;
+        this.name = name;
+        this.shortDesc = shortDesc;
+        this.detail = detail;
+        this.price = price;
+        this.status = status;
+    }
+
+    public ProductModel(int idCategory, String name, String shortDesc, String detail, int quantity, int price, int status) {
+        this.idCategory = idCategory;
+        this.name = name;
+        this.shortDesc = shortDesc;
+        this.detail = detail;
+        this.quantity = quantity;
+        this.price = price;
+        this.dateCreate = dateCreate;
+        this.status = status;
+    }
+
+    public ProductModel(int idCategory, String name, String shortDesc, String detail, int quantity, int price, Date dateCreate, int status, ImageModel image) {
+        this.idCategory = idCategory;
+        this.name = name;
+        this.shortDesc = shortDesc;
+        this.detail = detail;
+        this.quantity = quantity;
+        this.price = price;
+        this.dateCreate = dateCreate;
+        this.status = status;
+        this.image = image;
+    }
+
+    public ProductModel(int idProduct, int idCategory, String name, String shortDesc, String detail, int quantity, int price, Date dateCreate, int status, List<ImageModel> listImage) {
         this.idProduct = idProduct;
         this.idCategory = idCategory;
         this.name = name;
@@ -30,6 +64,40 @@ public class ProductModel {
         this.dateCreate = dateCreate;
         this.status = status;
         this.listImage = listImage;
+    }
+
+    public ProductModel(int idProduct, int idCategory, String name, String shortDesc, String detail, int quantity, int price, Date dateCreate, int status, ImageModel image) {
+        this.idProduct = idProduct;
+        this.idCategory = idCategory;
+        this.name = name;
+        this.shortDesc = shortDesc;
+        this.detail = detail;
+        this.quantity = quantity;
+        this.price = price;
+        this.dateCreate = dateCreate;
+        this.status = status;
+        this.image = image;
+    }
+
+    public ProductModel(int idProduct, int idCategory, String name, String shortDesc, String detail, int quantity, int price, Date dateCreate, int status, String nameImage) {
+        this.idProduct = idProduct;
+        this.idCategory = idCategory;
+        this.name = name;
+        this.shortDesc = shortDesc;
+        this.detail = detail;
+        this.quantity = quantity;
+        this.price = price;
+        this.dateCreate = dateCreate;
+        this.status = status;
+        this.nameImage = nameImage;
+    }
+
+    public String getNameImage() {
+        return nameImage;
+    }
+
+    public void setNameImage(String nameImage) {
+        this.nameImage = nameImage;
     }
 
     public int getIdProduct() {
@@ -80,11 +148,11 @@ public class ProductModel {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
@@ -111,4 +179,13 @@ public class ProductModel {
     public void setListImage(List<ImageModel> listImage) {
         this.listImage = listImage;
     }
+
+    public ImageModel getImage() {
+        return image;
+    }
+
+    public void setImage(ImageModel image) {
+        this.image = image;
+    }
+
 }

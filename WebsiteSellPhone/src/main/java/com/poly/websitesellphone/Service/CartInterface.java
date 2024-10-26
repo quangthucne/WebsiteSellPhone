@@ -1,5 +1,6 @@
 package com.poly.websitesellphone.Service;
 
+
 import com.poly.websitesellphone.model.CartModel;
 
 import java.util.List;
@@ -12,10 +13,16 @@ public interface CartInterface {
     String CART_SELECT_ALL = String.format("SELECT * FROM %s", TABLE_NAME);
     String CART_SELECT_BY_ID = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID_CART);
     String CART_SELECT_BY_ID_USER = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COLUMN_ID_USER);
+    String CART_INSERT = String.format("INSERT INTO %s (%s) VALUES (?)", TABLE_NAME, COLUMN_ID_USER);
+
 
     public List<CartModel> selectAll();
 
-    public CartModel selectById(String idCart);
 
-    public CartModel selectByIdUser(String idUser);
+    public CartModel selectById(int idCart);
+
+    public CartModel selectByIdUser(int idUser);
+
+    public boolean insert(int idUser);
+
 }

@@ -1,13 +1,12 @@
 package com.poly.websitesellphone.model;
 
-import java.util.List;
-
 public class OrderDetailModel {
     private int idOrderDetail;
     private int idOrder;
     private int idProduct;
     private int price;
     private int quantity;
+    private ProductModel productModel;
 
     public OrderDetailModel() {
     }
@@ -18,6 +17,31 @@ public class OrderDetailModel {
         this.idProduct = idProduct;
         this.price = price;
         this.quantity = quantity;
+    }
+
+
+    public OrderDetailModel(int idOrder, int idProduct, int price, int quantity) {
+        this.idOrder = idOrder;
+        this.idProduct = idProduct;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public OrderDetailModel(int idOrderDetail, int idOrder, int idProduct, int price, int quantity, ProductModel productModel) {
+        this.idOrderDetail = idOrderDetail;
+        this.idOrder = idOrder;
+        this.idProduct = idProduct;
+        this.price = price;
+        this.quantity = quantity;
+        this.productModel = productModel;
+    }
+
+    public ProductModel getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
 
     public int getIdOrderDetail() {
